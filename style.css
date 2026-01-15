@@ -64,7 +64,7 @@ a {
     --case-background: rgba(15, 15, 35, 0.5); /* Fond bleu nuit semi-transparent */
     --case-border: rgba(255, 255, 255, 0.15); /* Couleur de bordure subtile */
     --case-shadow: rgba(0, 0, 0, 0.3); /* Ombre douce pour la profondeur */
-    --text-color: #fde5f6; /* Couleur du texte des liens */
+    --text-color: #f4e6f0; /* Couleur du texte des liens */
     --sidebar-width: 260px; /* Largeur par défaut de la zone réservée à la sidebar */
 }
 
