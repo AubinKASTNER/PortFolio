@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" >
+    <title>PortFolio Aubin KASTNER</title>
+    <link href="style.css" rel="stylesheet" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Bouton pour ouvrir la sidebar, visible quand elle est fermée -->
+    <button id="openSidebar" class="sidebar-toggle open-btn" aria-label="Ouvrir le menu">☰</button>
+    <header id="sidebar">
+        <!-- Bouton pour fermer la sidebar, visible quand elle est ouverte -->
+        <button id="closeSidebar" class="sidebar-toggle close-btn" aria-label="Fermer le menu">✕</button>
+        <h1 class="sidebar-title"> Porfolio</h1>
+        <nav class="sidebar">
+            <ul>    
+                <li><a href="#accueil"><strong>Accueil</strong></a></li>
+                <li><a href="#apropos"><strong>À propos</strong></a></li>
+                <li><a href="#competences"><strong>Compétences</strong></a></li>
+                <li><a href="#projets"><strong>Projets</strong></a></li>
+                <li><a href="#certification"><strong>Certifications</strong></a></li>
+                <li><a href="#veille"><strong>Veille</strong></a></li>
+                <li><a href="#contact"><strong>Contact</strong></a></li>
+                <h4 class="mentions_legales"><a href="mentions_legales.html" target="_blank">Mentions légales</a></h4>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+
+
+        <main class="content">    
+            <section class="title" id="accueil">
+                <h1>PortFolio</h1>
+                 <h1>Aubin KASTNER</h1>
+            </section>
+            <section >
+                <h2>Bienvenue sur mon portfolio</h2>
+                <p>Découvrez mes projets et compétences.</p>
+            </section>
+            
+            <section id="apropos">
+                <h2>À propos</h2>
+                <p>Je suis Aubin KASTNER, étudiant en BTS. Passionné par le développement web et la création numérique.</p>
+            </section>
+            
+            <section id="competences">
+                <h2>Compétences</h2>
+                <ul>
+                    <li class="ls-competence">HTML/CSS</li>
+                    <li class="ls-competence">JavaScript</li>
+                    <li class="ls-competence">Design responsive</li>
+                    <li class="ls-competence">Autres compétences...</li>
+                </ul>
+            </section>
+            
+            <section id="projets">
+                <h2>Projets</h2>
+                <div class="projet">
+                    <h3>Projet 1</h3>
+                    <p>Description du projet...</p>
+                </div>
+                <div class="projet">
+                    <h3>Projet 2</h3>
+                    <p>Description du projet...</p>
+                </div>
+            </section>
+
+            <section id="certification">
+                <div class="certification">
+                    <h2>Certifications</h2>
+                    <div class="certification-columns">
+                        <img src="images/ANSSI.jpg" alt="Certifications ANSSI" class="certification-image" >
+                    </div>
+                </div>
+            </section>
+
+            <section id="veille">
+                <div class="veille">
+                    <h2>Veille</h2>
+                    <p>Description du projet...</p>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact</h2>
+                <form method="post" action="https://formsubmit.co/aubin.kastner12@gmail.com">
+                    <p>
+                        <label for="nom">Nom :</label>
+                        <input type="text" name="nom" id="nom" placeholder="Entrez votre nom" size="20" maxlength="20">
+                    </p>
+                    <p>
+                        <label for="email">Email :</label>
+                        <input type="email" name="email" id="email" placeholder="Entrez votre email" size="20" maxlength="30">
+                    </p>
+                    <p>
+                        <label for="objet">Objet :</label>
+                        <input type="text" name="objet" id="objet" placeholder="Entrez l'objet du message" size="30" maxlength="50">
+                    </p>
+                    <p>
+                        <label for="message">Message :</label>
+                        <textarea name="message" id="message" placeholder="Entrez votre message" rows="8" cols="40" maxlength="1000"></textarea>
+                    </p>
+                    <p>
+                        <button class="button" type="submit" name="submit">Envoyer le message</button>
+                    </p>
+                </form>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>

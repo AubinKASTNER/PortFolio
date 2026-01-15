@@ -1,0 +1,131 @@
+html {
+    scroll-behavior: smooth; /* Assure le défilement fluide au niveau du document */
+}
+
+/* Corps de page: dégradé animé en arrière-plan et configuration globale */
+body {
+    align-items: center;
+    font-family: Arial, sans-serif; /* Police principale du site */
+    line-height: 1.6; /* Hauteur de ligne pour améliorer la lisibilité */
+    background: linear-gradient(45deg, #616161, #8e8e8e, #a41414); /* dégradé de couleur en fond */
+    background-size: 200% 200%; /* Agrandit le fond pour permettre l'animation */
+    animation: gradient 10s ease infinite; /* Anime le dégradé en continu */
+    overflow-x: hidden; /* Évite le scroll horizontal intempestif */
+}
+
+/* Animation du dégradé d'arrière-plan */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%; /* Début du dégradé */
+    }
+    50% {
+        background-position: 100% 50%; /* Milieu: dégradé déplacé à droite */
+    }
+    100% {
+        background-position: 0% 50%; /* Fin: retour à la position initiale */
+    }
+}
+
+/* Variables de thème pour les blocs de contenu */
+:root {
+    --case-background: rgba(15, 15, 35, 0); /* Fond bleu nuit semi-transparent */
+    --case-border: rgba(255, 255, 255, 0.15); /* Couleur de bordure subtile */
+    --case-shadow: rgba(0, 0, 0, 0.3); /* Ombre douce pour la profondeur */
+}
+
+h1 {
+    text-align: center;
+    font-family: "Dancing Script", cursive;
+    color: white;
+    text-shadow: 1px 5px 2cap rgba(255, 255, 255);
+    font-size: 60px;
+    margin: 30px auto;
+}
+
+h2 {
+    text-align: center;
+    font-family: "Dancing Script", cursive;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 1px 5px 2cap rgba(255, 255, 255);
+    font-size: 36px;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: white;
+    font-size: 22px;
+}
+
+section {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px 30px;
+    background-color: var(--case-background);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--case-shadow);
+    border: 1px solid var(--case-border);
+    backdrop-filter: blur(5px);
+    text-align: center;
+}
+
+section p,
+section li {
+    font-size: 20px;
+    padding: 16px 20px;
+    margin: 0 0 15px 0;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: rgba(15, 15, 35, 0.35);
+    border-radius: 10px;
+}
+
+a {
+    text-decoration: underline;
+    color: white;
+}
+
+/* Responsive */
+@media screen and (max-width: 1023px) {
+    section {
+        max-width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    section p,
+    section li {
+        font-size: 18px;
+        padding: 12px 16px;
+    }
+    h1 {
+        font-size: 48px;
+        margin: 20px auto;
+    }
+    h2 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    section {
+        max-width: 100%;
+        margin: 16px auto;
+        padding: 16px;
+    }
+    section p,
+    section li {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+    h1 {
+        font-size: 38px;
+    }
+    h2 {
+        font-size: 26px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+}
