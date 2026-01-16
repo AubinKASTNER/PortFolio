@@ -3,20 +3,33 @@
 
 <head>
     <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PortFolio Aubin KASTNER</title>
     <link href="style.css" rel="stylesheet" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/webp" href="images/favicon.webp">
 </head>
-<body>    <div id="intro-overlay">
-        <button id="enterBtn" class="intro-button">Entrer</button>
+<body>   
+    <div id="password-overlay">
+        <div class="password-container">
+            <h1 class="password-title">Accès Portfolio</h1>
+            <p class="password-subtitle">Veuillez entrer le mot de passe pour accéder au site</p>
+            <input type="password" id="password-input" placeholder="Mot de passe" autocomplete="off">
+            <p id="password-error" class="error-message"></p>
+            <button id="validatePassword" class="password-button">
+                <span>Valider</span>
+            </button>
+        </div>
+    </div> 
+    <div id="intro-overlay">
+        <button id="enterBtn" class="intro-button"><span>Bienvenue sur mon Porfolio</span></button>
     </div>
     <div id="site-content">
-        <button id="openSidebar" class="sidebar-toggle open-btn" aria-label="Ouvrir le menu">☰</button>
+        <button id="openSidebar" class="sidebar-toggle open-btn" aria-label="Ouvrir le menu"><img src="images/hamburger.webp" alt="menu" class="menu-image"></button>
         <header id="sidebar">
-            <button id="closeSidebar" class="sidebar-toggle close-btn" aria-label="Fermer le menu">✕</button>
+            <button id="closeSidebar" class="sidebar-toggle close-btn" aria-label="Fermer le menu"><img src="images/cross.webp" alt="close" class="cross-image"></button>
             <h1 class="sidebar-title"> Porfolio</h1>
             <nav class="sidebar">
                 <ul>    
@@ -27,18 +40,17 @@
                     <li><a href="#certification"><strong>Certifications</strong></a></li>
                     <li><a href="#veille"><strong>Veille</strong></a></li>
                     <li><a href="#contact"><strong>Contact</strong></a></li>
-                    <li class="social"><a href="https://www.linkedin.com/in/aubin-kastner/" target="_blank"><img src="images/linkedin.png" alt="LinkedIn" class="linkedin-image"></a><a href="https://github.com/AubinKASTNER" target="_blank"><img src="images/github.png" alt="GitHub" class="github-image"></a></li>
+                    <li class="social"><a href="https://www.linkedin.com/in/aubin-kastner/" target="_blank"><img src="images/linkedin.webp" alt="LinkedIn" class="linkedin-image"></a><a href="https://github.com/AubinKASTNER" target="_blank"><img src="images/github.webp" alt="GitHub" class="github-image"></a></li>
                     <li class="copyright"><p>&copy; 2026 Aubin KASTNER.<br> Tous droits réservés.</p></li>
                 </ul>
             </nav>
         </header>
-        <div class="container">
+        <div id="container" class="container">
 
             <main class="content">    
-            <section class="title" id="accueil">
-                <h1>PortFolio</h1>
+            <div class="title" id="accueil">
                  <h1>Aubin KASTNER</h1>
-            </section>
+            </div>
             <section >
                 <h2>Bienvenue sur mon portfolio</h2>
                 <p>Découvrez mes projets et compétences.</p>
@@ -75,7 +87,7 @@
                 <div class="certification">
                     <h2>Certifications</h2>
                     <div class="certification-columns">
-                        <img src="images/ANSSI.jpg" alt="Certifications ANSSI" class="certification-image" >
+                        <img src="images/ANSSI.webp" alt="Certifications ANSSI" class="certification-image" >
                     </div>
                 </div>
             </section>

@@ -34,8 +34,7 @@ body {
 }
 
 /* En-tête: contenu textuel, intégré au fond général (transparent) */
-header {
-    
+header {  
 }
 
 a {
@@ -49,6 +48,7 @@ a {
     min-height: calc(100vh - 80px); /* Hauteur minimale moins celle du header */
     position: relative; /* Permet des positionnements relatifs d'éléments internes */
     z-index: 1; /* Place le contenu au-dessus du fond */
+    transition: all 0.3s ease-in-out;
 }
 
 /* Variables de thème pour les éléments en « cases » */
@@ -60,8 +60,437 @@ a {
     --text-color2: #dfdfdf; /* Couleur du sous texte */
     --text-shadow: 1px 5px 2cap rgba(255, 255, 255);
     --sidebar-width: 260px; 
+    --anim--hover-time: 300ms;
+    --anim--hover-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --angle-1: 45deg;
+    --angle-2: 45deg;
+    --shadow-cuttoff-fix: 100%;
 }
 
+/* ================= SYSTÈME DE MOT DE PASSE ================= */
+#password-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #616161, #8e8e8e, #a41414);
+    background-size: 200% 200%;
+    animation: gradient 10s ease infinite;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.password-container {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 50px 40px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.password-title {
+    color: var(--text-color1);
+    font-family: "Dancing Script", cursive;
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    text-shadow: var(--text-shadow);
+}
+
+.password-subtitle {
+    color: var(--text-color2);
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+#password-input {
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    color: var(--text-color1);
+    font-size: 1.1rem;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+#password-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+#password-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.error-message {
+    color: #ff6b6b;
+    min-height: 24px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.password-hint {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    margin-top: 25px;
+    font-style: italic;
+}
+
+/* Bouton de validation - basé sur le bouton d'introduction */
+.password-button {
+  --border-width: clamp(1px, 0.0625em, 4px);
+
+  all: unset;
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  
+  display: inline-block;
+  margin: 0 auto;
+
+  background: linear-gradient(
+    -75deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  border-radius: 999vw;
+
+  box-shadow:
+    inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+    inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+    0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.2),
+    0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2);
+
+  backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+  -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+
+  transition: all var(--anim--hover-time) var(--anim--hover-ease);
+}
+
+.password-button:hover {
+  transform: scale(0.975);
+
+  backdrop-filter: blur(0.01em);
+  -webkit-backdrop-filter: blur(0.01em);
+
+  box-shadow:
+    inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+    inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+    0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.25),
+    0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.5);
+}
+
+/* Texte du bouton */
+.password-button span {
+  position: relative;
+  display: block;
+  padding: 0.875em 1.5em;
+
+  font-family: "Inter", sans-serif;
+  font-size: 1.5em;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  color: rgb(50, 50, 50);
+
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+
+  text-shadow: 0 0.25em 0.05em rgba(0, 0, 0, 0.1);
+
+  transition: all var(--anim--hover-time) var(--anim--hover-ease);
+}
+
+.password-button:hover span {
+  text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.12);
+}
+
+/* Effet lumière texte */
+.password-button span::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-width) / 2);
+  border-radius: 999vw;
+  pointer-events: none;
+
+  background: linear-gradient(
+    var(--angle-2),
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 45%,
+    rgba(255, 255, 255, 0) 55%
+  );
+
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  mix-blend-mode: screen;
+
+  transition:
+    background-position calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease),
+    --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
+}
+
+.password-button:hover span::after {
+  background-position: 25% 50%;
+}
+
+.password-button:active span::after {
+  background-position: 50% 15%;
+  --angle-2: -15deg;
+}
+
+/* Outline */
+.password-button::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-width) * -0.5);
+  border-radius: 999vw;
+  padding: var(--border-width);
+  pointer-events: none;
+
+  background:
+    conic-gradient(
+      from var(--angle-1),
+      rgba(0, 0, 0, 0.5),
+      transparent 5% 40%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 60% 95%,
+      rgba(0, 0, 0, 0.5)
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+
+  box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.5);
+
+  transition:
+    all var(--anim--hover-time) var(--anim--hover-ease),
+    --angle-1 500ms ease;
+}
+
+.password-button:hover::after {
+  --angle-1: -125deg;
+}
+
+.password-button:active::after {
+  --angle-1: -75deg;
+}
+
+/* Cacher l'écran de mot de passe une fois validé */
+#password-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+}
+
+#intro-overlay{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #616161, #8e8e8e, #a41414);
+    background-size: 200% 200%;
+    z-index: 500;
+}
+
+.intro-title{
+    color: var(--text-color1);
+    font-family: "Dancing Script", cursive;
+    font-weight: 500;
+    font-weight: bolder;
+    font-size: 150px;
+    margin-bottom: 30px;
+    position: fixed;
+    top: 15%;
+}
+
+/* ================= BOUTON ================= */
+.intro-button {
+  --border-width: clamp(1px, 0.0625em, 4px);
+
+  all: unset;
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+
+  background: linear-gradient(
+    -75deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+
+  border-radius: 999vw;
+
+  box-shadow:
+    inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+    inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+    0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.2),
+    0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2);
+
+  backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+  -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+
+  transition: all var(--anim--hover-time) var(--anim--hover-ease);
+}
+
+.intro-button:hover {
+  transform: scale(0.975);
+
+  backdrop-filter: blur(0.01em);
+  -webkit-backdrop-filter: blur(0.01em);
+
+  box-shadow:
+    inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
+    inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+    0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.25),
+    0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.5);
+}
+
+/* ================= TEXTE ================= */
+.intro-button span {
+  position: relative;
+  display: block;
+  padding: 0.875em 1.5em;
+
+  font-family: "Inter", sans-serif;
+  font-size: 5em;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  color: rgb(50, 50, 50);
+
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+
+  text-shadow: 0 0.25em 0.05em rgba(0, 0, 0, 0.1);
+
+  transition: all var(--anim--hover-time) var(--anim--hover-ease);
+}
+
+.intro-button:hover span {
+  text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.12);
+}
+
+/* ================= EFFET LUMIÈRE TEXTE ================= */
+.intro-button span::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-width) / 2);
+  border-radius: 999vw;
+  pointer-events: none;
+
+  background: linear-gradient(
+    var(--angle-2),
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 45%,
+    rgba(255, 255, 255, 0) 55%
+  );
+
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  mix-blend-mode: screen;
+
+  transition:
+    background-position calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease),
+    --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
+}
+
+.intro-button:hover span::after {
+  background-position: 25% 50%;
+}
+
+.intro-button:active span::after {
+  background-position: 50% 15%;
+  --angle-2: -15deg;
+}
+
+/* ================= OUTLINE ================= */
+.intro-button::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-width) * -0.5);
+  border-radius: 999vw;
+  padding: var(--border-width);
+  pointer-events: none;
+
+  background:
+    conic-gradient(
+      from var(--angle-1),
+      rgba(0, 0, 0, 0.5),
+      transparent 5% 40%,
+      rgba(0, 0, 0, 0.5) 50%,
+      transparent 60% 95%,
+      rgba(0, 0, 0, 0.5)
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+
+  box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.5);
+
+  transition:
+    all var(--anim--hover-time) var(--anim--hover-ease),
+    --angle-1 500ms ease;
+}
+
+.intro-button:hover::after {
+  --angle-1: -125deg;
+}
+
+.intro-button:active::after {
+  --angle-1: -75deg;
+}
+
+/* ================= MOBILE / TOUCH ================= */
+@media (hover: none) and (pointer: coarse) {
+  .intro-button span::after {
+    --angle-2: -45deg;
+  }
+
+  .intro-button::after {
+    --angle-1: -75deg;
+  }
+}
+
+#intro-overlay.hidden{
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+}
+
+#site-content{
+    min-height: 100vh;
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+    transition: clip-path 0.9s ease-out, opacity 0.9s ease-out;
+}
+
+#site-content.reveal{
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+}
 .title {
     color: var(--text-color1); /* Couleur du texte du header */
     font-family: "Dancing Script", cursive; /* Police décorative pour le header */
@@ -70,10 +499,6 @@ a {
     text-align: center; /* Centre le texte horizontalement */
     padding: 20px 0; /* Espacement vertical du header */    
     margin-bottom: 50px; /* Espacement en bas pour séparer du contenu */
-    backdrop-filter: none; /* Aucun effet de flou pour rester discret */
-    border-bottom: none; /* Pas de séparation visuelle pour rester intégré */
-    border: none;
-    box-shadow: none;
 }
 
 header#sidebar{
@@ -97,13 +522,6 @@ header#sidebar{
 
 header#sidebar.open-sidebar {
     transform: translateX(0); /* Ramène la sidebar à sa position d'origine (visible) quand la classe est ajoutée */
-}
-
-header#sidebar .close-btn{
-    position: absolute; /* Positionne le bouton fermer par rapport à la sidebar (son parent positionné) */
-    top: 10px; /* Place le bouton à 10px du haut de la sidebar */
-    right: 10px; /* Place le bouton à 10px de la droite de la sidebar */
-    display: none; /* Cache le bouton fermer par défaut (il sera affiché via JS) */
 }
 
 .sidebar-toggle{
@@ -197,6 +615,16 @@ header#sidebar .sidebar-title{
     border-bottom: none; /* Pas de séparation visuelle pour rester intégré */   
 }
 
+.menu-image{
+    width: 20px;
+    margin: 0 2px;
+}
+
+.cross-image{
+    width: 18px;
+    margin: 0 3px;
+}
+
 .linkedin-image{
     width: 40px;
 }
@@ -279,45 +707,6 @@ h3{
 
 .certification-image{
     width: 80%;
-}
-
-#intro-overlay{
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(45deg, #616161, #8e8e8e, #a41414);
-    background-size: 200% 200%;
-    z-index: 500;
-}
-
-.intro-button{
-    padding: 14px 34px;
-    font-size: 26px;
-    border-radius: 999px;
-    border: 1px solid var(--case-border);
-    background-color: rgba(255, 255, 255, 0.2);
-    color: var(--text-color1);
-    cursor: pointer;
-}
-
-#intro-overlay.hidden{
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease-out;
-}
-
-#site-content{
-    min-height: 100vh;
-    clip-path: circle(0% at 50% 50%);
-    opacity: 0;
-    transition: clip-path 0.9s ease-out, opacity 0.9s ease-out;
-}
-
-#site-content.reveal{
-    clip-path: circle(150% at 50% 50%);
-    opacity: 1;
 }
 /* Formulaire de contact: mise en forme générale */
 form {
@@ -426,9 +815,9 @@ form button[type="submit"]:active {
 }
 
 /* Écrans d'ordinateur (>= 1024px) : espace symétrique pour la sidebar à gauche et à droite */
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1024px) and (max-width: 1799px) {
     :root {
-        --sidebar-width: 220px;
+        --sidebar-width: 240px;
     }
     header {
         padding-left: var(--sidebar-width);
@@ -439,6 +828,57 @@ form button[type="submit"]:active {
         max-width: 1100px;
         margin: 0 auto;
     }
+    header#sidebar ul li a {
+        font-size: 30px;
+    }
+    header#sidebar ul{
+        gap: 15px;
+    }
+    header#sidebar .sidebar-title{
+        padding: 15px 0;
+        margin-bottom: -20px;
+    }
+    .copyright{
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-width:1800px) {
+    :root {
+        --sidebar-width: 400px;
+    }
+        
+    header#sidebar ul li a {
+        font-size: 55px;
+    }
+    header#sidebar ul{
+        gap: 45px;
+    }
+    .menu-image{
+        width: 40px;        
+    }
+    .cross-image{
+        width: 30px;
+        margin: 5px 5px;
+    }
+    .close-btn{
+        padding: 12px 12px;
+    }
+    .copyright{
+        font-size: 28px;
+    }
+    section {
+        margin-left: -200px;
+        margin-right: -200px;
+    }
+    h2{
+        font-size: 50px;
+    }
+
+    p{
+        font-size: 30px;
+    }
+    
 }
 
 /* Tablettes (768px - 1023px) : sidebar légèrement plus étroite */
@@ -456,14 +896,16 @@ form button[type="submit"]:active {
     }
 }
 
-/* Téléphones (<= 767px) : sidebar encore plus étroite en proportion */
-@media screen and (max-width: 767px) {
-    :root {
-        --sidebar-width: 70vw;
+/* Téléphones (<= 767px) : sidebar retiré */
+@media screen and (min-width: 1px) and (max-width: 767px) {
+    header#sidebar {
+        display: none;
     }
-    header {
-        padding-left: 0;
-        padding-right: 0;
+    .sidebar-toggle {
+        display: none;
+    }
+    .menu-image{
+        display: none;
     }
     .content {
         max-width: 100%;
@@ -472,9 +914,6 @@ form button[type="submit"]:active {
     }
     section {
         padding: 20px;
-    }
-    header#sidebar ul li a {
-        font-size: 22px;
     }
     .title {
         font-size: 38px;
