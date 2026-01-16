@@ -9,30 +9,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Bouton pour ouvrir la sidebar, visible quand elle est fermée -->
-    <button id="openSidebar" class="sidebar-toggle open-btn" aria-label="Ouvrir le menu">☰</button>
-    <header id="sidebar">
-        <!-- Bouton pour fermer la sidebar, visible quand elle est ouverte -->
-        <button id="closeSidebar" class="sidebar-toggle close-btn" aria-label="Fermer le menu">✕</button>
-        <h1 class="sidebar-title"> Porfolio</h1>
-        <nav class="sidebar">
-            <ul>    
-                <li><a href="#accueil"><strong>Accueil</strong></a></li>
-                <li><a href="#apropos"><strong>À propos</strong></a></li>
-                <li><a href="#competences"><strong>Compétences</strong></a></li>
-                <li><a href="#projets"><strong>Projets</strong></a></li>
-                <li><a href="#certification"><strong>Certifications</strong></a></li>
-                <li><a href="#veille"><strong>Veille</strong></a></li>
-                <li><a href="#contact"><strong>Contact</strong></a></li>
-                <h4 class="mentions_legales"><a href="mentions_legales.html" target="_blank">Mentions légales</a></h4>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
+<body>    <div id="intro-overlay">
+        <button id="enterBtn" class="intro-button">Entrer</button>
+    </div>
+    <div id="site-content">
+        <button id="openSidebar" class="sidebar-toggle open-btn" aria-label="Ouvrir le menu">☰</button>
+        <header id="sidebar">
+            <button id="closeSidebar" class="sidebar-toggle close-btn" aria-label="Fermer le menu">✕</button>
+            <h1 class="sidebar-title"> Porfolio</h1>
+            <nav class="sidebar">
+                <ul>    
+                    <li><a href="#accueil"><strong>Accueil</strong></a></li>
+                    <li><a href="#apropos"><strong>À propos</strong></a></li>
+                    <li><a href="#competences"><strong>Compétences</strong></a></li>
+                    <li><a href="#projets"><strong>Projets</strong></a></li>
+                    <li><a href="#certification"><strong>Certifications</strong></a></li>
+                    <li><a href="#veille"><strong>Veille</strong></a></li>
+                    <li><a href="#contact"><strong>Contact</strong></a></li>
+                    <li class="social"><a href="https://www.linkedin.com/in/aubin-kastner/" target="_blank"><img src="images/linkedin.png" alt="LinkedIn" class="linkedin-image"></a><a href="https://github.com/AubinKASTNER" target="_blank"><img src="images/github.png" alt="GitHub" class="github-image"></a></li>
+                    <li class="copyright"><p>&copy; 2026 Aubin KASTNER.<br> Tous droits réservés.</p></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="container">
 
-
-        <main class="content">    
+            <main class="content">    
             <section class="title" id="accueil">
                 <h1>PortFolio</h1>
                  <h1>Aubin KASTNER</h1>
@@ -108,7 +109,12 @@
                         <button class="button" type="submit" name="submit">Envoyer le message</button>
                     </p>
                 </form>
-        </main>
+
+            </main>
+        </div>
+        <footer>
+            <h4 class="mentions_legales"><a href="mentions_legales.html" target="_blank">Mentions légales</a></h4>
+        </footer>
     </div>
     <script src="script.js"></script>
 </body>

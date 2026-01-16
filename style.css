@@ -35,15 +35,7 @@ body {
 
 /* En-tête: contenu textuel, intégré au fond général (transparent) */
 header {
-    color: var(--text-color1); /* Couleur du texte du header */
-    font-family: "Dancing Script", cursive; /* Police décorative pour le header */
-    font-size: 50px; /* Taille du texte du header */
-    text-shadow: var(--text-shadow); /* Légère ombre portée sur le texte */
-    text-align: center; /* Centre le texte horizontalement */
-    padding: 20px 0; /* Espacement vertical du header */
-    background-color: transparent; /* Laisse apparaître le dégradé du body */
-    backdrop-filter: none; /* Aucun effet de flou pour rester discret */
-    border-bottom: none; /* Pas de séparation visuelle pour rester intégré */
+    
 }
 
 a {
@@ -61,13 +53,13 @@ a {
 
 /* Variables de thème pour les éléments en « cases » */
 :root {
-    --case-background: rgba(15, 15, 35, 0.5); /* Fond bleu nuit semi-transparent */
-    --case-border: rgba(255, 255, 255, 0.15); /* Couleur de bordure subtile */
+    --case-background: #00000030; /* Fond bleu nuit semi-transparent */
+    --case-border: rgba(255, 255, 255, 0.208); /* Couleur de bordure subtile */
     --case-shadow: rgba(0, 0, 0, 0.3); /* Ombre douce pour la profondeur */
     --text-color1: #ffffff; /* Couleur du texte */
     --text-color2: #dfdfdf; /* Couleur du sous texte */
     --text-shadow: 1px 5px 2cap rgba(255, 255, 255);
-    --sidebar-width: 220px; 
+    --sidebar-width: 260px; 
 }
 
 .title {
@@ -78,7 +70,6 @@ a {
     text-align: center; /* Centre le texte horizontalement */
     padding: 20px 0; /* Espacement vertical du header */    
     margin-bottom: 50px; /* Espacement en bas pour séparer du contenu */
-    background-color: transparent; /* Laisse apparaître le dégradé du body */
     backdrop-filter: none; /* Aucun effet de flou pour rester discret */
     border-bottom: none; /* Pas de séparation visuelle pour rester intégré */
     border: none;
@@ -124,12 +115,20 @@ header#sidebar .close-btn{
 
 .open-btn,
 .close-btn{
-    background-color: rgba(255, 255, 255, 0.2); /* Fond blanc semi-transparent (20%) pour les boutons */
+    background-color: #00000013; /* Fond blanc semi-transparent (20%) pour les boutons */
     color: var(--text-color1); /* Couleur du texte (icône) en blanc */
     border: 1px solid var(--case-border); /* Bordure fine utilisant la variable de couleur du thème */
     border-radius: 8px; /* Arrondit les coins des boutons de 8px */
     padding: 8px 12px; /* Ajoute de l'espace interne : 8px verticalement, 12px horizontalement */
     cursor: pointer; /* Change le curseur en main au survol pour indiquer que c'est cliquable */
+    transition: all 0.3s; /* Anime les changements (survol) en douceur */
+}
+
+.open-btn:hover,
+.close-btn:hover{
+    background-color: rgba(255, 255, 255, 0.3); /* Accentue le fond au survol */
+    transform: translateY(-2px); /* Légère élévation au survol */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
 }
 
 header#sidebar ul{
@@ -137,7 +136,7 @@ header#sidebar ul{
    flex: 1; /* La liste prend tout l'espace disponible de la sidebar */
    display: flex; /* Utilise flexbox pour les éléments internes */
    flex-direction: column; /* Empile les éléments de liste verticalement */
-   gap: 20px; /* Espacement entre les éléments de navigation */
+   gap: 35px; /* Espacement entre les éléments de navigation */
    padding: 0; /* Retire les marges internes */
    margin: 0; /* Retire les marges externes */ 
 }
@@ -149,7 +148,13 @@ header#sidebar ul li{
     align-items: center; /* Aligne verticalement le contenu au centre */
     justify-content: center; /* Aligne horizontalement le contenu au centre */
     min-height: 50px; /* Hauteur minimale pour garantir la lisibilité */
-
+    box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur et la hauteur */
+    white-space: normal;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-align: center;
+    font-family: "Dancing Script", cursive; /* Police des liens */
+    text-decoration: none; /* Supprime le soulignement par défaut */
 }
 
 header#sidebar ul li a{
@@ -168,9 +173,9 @@ header#sidebar ul li a{
     text-align: center;
     font-family: "Dancing Script", cursive; /* Police des liens */
     text-decoration: none; /* Supprime le soulignement par défaut */
-    border-radius: 10px; /* Coins légèrement arrondis */
+    border-radius: 20px; /* Coins légèrement arrondis */
     transition: all 0.3s; /* Anime les changements (survol) en douceur */
-    background-color:  #b9722c00; /* Léger contraste de fond discret */
+    background-color: #00000013 ; /* Léger contraste de fond discret */
     border: 1px solid var(--case-border); /* Bordure cohérente avec le thème des cases */
 }
 
@@ -180,8 +185,7 @@ header#sidebar ul li a:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
 }
 
-header#sidebar .sidebar-title
-{
+header#sidebar .sidebar-title{
     color: var(--text-color1); /* Couleur du texte du header */
     font-family: "Dancing Script", cursive; /* Police décorative pour le header */
     font-size: 60px; /* Taille du texte du header */
@@ -193,6 +197,25 @@ header#sidebar .sidebar-title
     border-bottom: none; /* Pas de séparation visuelle pour rester intégré */   
 }
 
+.linkedin-image{
+    width: 40px;
+}
+
+.github-image{
+    width: 40px;
+}
+
+.social a{
+    margin: 0 10px;
+}
+
+
+.copyright{
+    bottom: 10px;
+    font-size: 16px;
+    color: var(--text-color1);
+    text-shadow: var(--text-shadow);/* ombrage du texte */
+}
 
 .mentions_legales {
     font-size: 20px; /* taille du texte */
@@ -222,7 +245,7 @@ section {
     margin-left: 0;
     margin-right: 0;
     background-color: var(--case-background); /* Fond commun des cases */
-    border-radius: 10px; /* Coins arrondis des sections */
+    border-radius: 80px 10px; /* Coins arrondis des sections */
     box-shadow: 0 5px 15px var(--case-shadow); /* Ombre douce des sections */
     border: 1px solid var(--case-border); /* Bordure discrète des sections */
     backdrop-filter: blur(5px); /* Flou derrière la section (effet verre) */
@@ -233,9 +256,6 @@ h2 {
     font-size: 40px;
     color: var(--text-color1); /* Couleur du texte des titres */
     text-shadow: var(--text-shadow);/* ombrage du texte */
-}
-p{
-    font-size: 24px;
 }
 
 h3{
@@ -260,6 +280,45 @@ h3{
 .certification-image{
     width: 80%;
 }
+
+#intro-overlay{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #616161, #8e8e8e, #a41414);
+    background-size: 200% 200%;
+    z-index: 500;
+}
+
+.intro-button{
+    padding: 14px 34px;
+    font-size: 26px;
+    border-radius: 999px;
+    border: 1px solid var(--case-border);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-color1);
+    cursor: pointer;
+}
+
+#intro-overlay.hidden{
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+}
+
+#site-content{
+    min-height: 100vh;
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+    transition: clip-path 0.9s ease-out, opacity 0.9s ease-out;
+}
+
+#site-content.reveal{
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+}
 /* Formulaire de contact: mise en forme générale */
 form {
     max-width: auto; /* Largeur maximale du formulaire */ /* Centre le formulaire horizontalement */
@@ -267,6 +326,7 @@ form {
 
 form p {
     margin-bottom: 15px; /* Espacement entre les paragraphes du formulaire */
+    font-size: 24px;
     color: var(--text-color1);
 }
 
@@ -368,7 +428,7 @@ form button[type="submit"]:active {
 /* Écrans d'ordinateur (>= 1024px) : espace symétrique pour la sidebar à gauche et à droite */
 @media screen and (min-width: 1024px) {
     :root {
-        --sidebar-width: 260px;
+        --sidebar-width: 220px;
     }
     header {
         padding-left: var(--sidebar-width);
