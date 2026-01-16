@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorMessage = document.getElementById('password-error');
     
     // Mot de passe correct (vous pouvez le changer)
-    const correctPassword = 'portfolio2024';
+    const correctPassword = 'portfolio2026';
     
     // Vérifier si le mot de passe a déjà été saisi
     if (sessionStorage.getItem('portfolioAccessGranted') === 'true') {
